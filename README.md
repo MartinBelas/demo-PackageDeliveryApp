@@ -11,7 +11,7 @@ Data are kept in memory (no database engine). 
 Standard gradle way.
 
 ### Prerequisites
-Needs to run on a Java SE Runtime Environment 8. //TODO 8 or 11 ?
+Needs to run on JRE 8 or higher.
 
 
 ## Getting Started
@@ -19,8 +19,9 @@ Needs to run on a Java SE Runtime Environment 8. //TODO 8 or 11 ?
 To run the application execute command:
 
 ```
-gradlew run
+gradlew run --console=plain
 ```
+If you run the application this way, you can't provide argument with input file.
 
 To build the executable jar run:
 
@@ -32,24 +33,31 @@ gradlew fatJar
 The jar file can be found in build/libs folder and can be run by command:
 
 ```
-java -jar PackageDelivery-1.0-SNAPSHOT.jar
+java -jar PackageDeliveryApp.jar
+```
+
+or you can provide a csv file with prepared packages info:
+
+```
+java -jar PackageDeliveryApp.jar inputFilePath
+
+for example:
+java -jar PackageDeliveryApp.jar ../../data/packages.csv
 ```
 
 
 ## Running the tests
 
-To run unit tests run
+To run unit tests run:
 
 ```
 gradlew test
 ```
 
-To run integration tests run
 
-```
-gradlew intTest
-
-```
+## Not finished yet
+- Javadoc
+- Integration tests
 
 
 ## Author
