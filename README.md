@@ -8,7 +8,8 @@ Data are kept in memory (no database engine). 
 The behavior of the application is slightly different from the assignment, 
 the console print is performed every 10 seconds to make it clearer what is happening in the application.
 
-There is prepared a file with packages data in /data folder. It contains about 70k records and it is read by 
+There is prepared a file with packages data in /data folder. It contains about 70k records, it is read by ParcelsInfoFromFileReader
+and the reading is intentionally slowed down to show how it works together with writing to the console the non-blocking way in different threads.
 
 ## Installation
 
