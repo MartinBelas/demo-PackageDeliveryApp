@@ -20,6 +20,6 @@ public class Parcel {
     
     @Override
     public String toString() {
-        return String.format("Weight: %d, postal code: %s", this.weight, this.destinationPostalCode);
+        return String.format("Weight: %s, postal code: %s", this.weight, this.destinationPostalCode);
     }
 }

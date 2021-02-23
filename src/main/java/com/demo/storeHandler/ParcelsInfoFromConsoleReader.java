@@ -46,7 +46,7 @@ public class ParcelsInfoFromConsoleReader implements ParcelsInfoReader {
                 if (Arrays.asList(QUIT_READING).contains(input)) {
                     sc.close();
                     //break;
-                    log.info("The application was terminated correctly.");
+                    log.info("The application was terminated correctly after reading from console.");
                     System.exit(0);
                 }
                 
