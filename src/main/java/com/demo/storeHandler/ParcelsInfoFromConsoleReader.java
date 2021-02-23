@@ -1,4 +1,4 @@
-package com.demo.parcelsInfoReader;
+package com.demo.storeHandler;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.demo.Parcel;
 import com.demo.Store;
+import com.demo.util.StringUtil;
 
 public class ParcelsInfoFromConsoleReader implements ParcelsInfoReader {
 
@@ -17,13 +18,15 @@ public class ParcelsInfoFromConsoleReader implements ParcelsInfoReader {
     private static final String[] QUIT_READING = { "quit", "q" };
 
     private final Store store;
+    
+    private StringUtil stringUtil = new StringUtil();
 
     public ParcelsInfoFromConsoleReader(Store store) {
         this.store = store;
     }
 
     @Override
-    public void read() {
+    public void run() {
 
         Scanner sc = new Scanner(System.in);
 
@@ -42,10 +45,12 @@ public class ParcelsInfoFromConsoleReader implements ParcelsInfoReader {
                 
                 if (Arrays.asList(QUIT_READING).contains(input)) {
                     sc.close();
-                    break;
+                    //break;
+                    log.info("The application was terminated correctly.");
+                    System.exit(0);
                 }
                 
-                firstWhiteSpace = getFirstWhiteSpaceIndex(input);
+                firstWhiteSpace = stringUtil.getFirstWhiteSpaceIndex(input);
                 
                 if (firstWhiteSpace < 1) {
                     break;
@@ -70,29 +75,5 @@ public class ParcelsInfoFromConsoleReader implements ParcelsInfoReader {
                 log.info("New package stored.");
             }
         }
-    }
-    
-    //TODO I haven't found better way recently.
-    int getFirstWhiteSpaceIndex(String s) {
-        
-        s = s.trim();
-
-        int firstSpace = s.indexOf(" ");
-        int firstTab = s.indexOf("\t");
-        
-        if (firstSpace < 1 && firstTab < 1) {
-            log.warn("Input must contain at least one white space char.");
-            return -1;
-        }
-
-        int firstWhite = -1;
-        
-        if (firstSpace > 0)
-            firstWhite = firstSpace;
-
-        if ((firstWhite < 0 && firstTab > 0) || (firstWhite > 0 && firstTab > 0 && firstTab < firstWhite))
-            firstWhite = firstTab;
-
-        return firstWhite;
     }
 }

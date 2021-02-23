@@ -1,13 +1,15 @@
 package com.demo;
 
-import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.demo.parcelsInfoReader.ParcelsInfoFromConsoleReader;
-import com.demo.parcelsInfoReader.ParcelsInfoFromFileReader;
-import com.demo.parcelsInfoReader.ParcelsInfoReader;
+import com.demo.storeHandler.ParcelsInfoConsoleWriter;
+import com.demo.storeHandler.ParcelsInfoFromConsoleReader;
+import com.demo.storeHandler.ParcelsInfoFromFileReader;
+import com.demo.storeHandler.ParcelsInfoReader;
 
 
 /**
@@ -18,10 +20,12 @@ import com.demo.parcelsInfoReader.ParcelsInfoReader;
 public class App {
     
     private static final Logger log = LogManager.getLogger(App.class);
-    
+
     private static Store store = new Store();
     
     public static void main(String[] args) {
+
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
         
         log.info("The Application started.");
         
@@ -35,12 +39,8 @@ public class App {
 
         log.info("Start reading info about new packages...");
         
-        try {
-            reader.read();  //TODO v novem vlakne
-        } catch (IOException e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
-        } 
+        executorService.submit(reader);
         
+        executorService.submit(new ParcelsInfoConsoleWriter());
     }
 }

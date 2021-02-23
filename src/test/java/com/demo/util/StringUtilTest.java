@@ -1,22 +1,14 @@
-package com.demo.parcelsInfoReader;
+package com.demo.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import org.mockito.Mock;
+class StringUtilTest {
 
-import com.demo.Store;
-
-class ParcelsInfoFromConsoleReaderTest {
-
-    ParcelsInfoFromConsoleReader reader;
-
-    @Mock
-    Store store;
+    StringUtil stringUtil;
 
     @BeforeAll
     static void setUpBeforeClass() throws Exception {
@@ -24,7 +16,7 @@ class ParcelsInfoFromConsoleReaderTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        reader = new ParcelsInfoFromConsoleReader(store);
+        stringUtil = new StringUtil();
     }
 
     @Test
@@ -33,7 +25,7 @@ class ParcelsInfoFromConsoleReaderTest {
         String s = "123 abc";
         int expected = 3;
 
-        assertEquals(expected, reader.getFirstWhiteSpaceIndex(s), "The only one white space is a space.");
+        assertEquals(expected, stringUtil.getFirstWhiteSpaceIndex(s), "The only one white space is a space.");
     }
 
     @Test
@@ -42,7 +34,7 @@ class ParcelsInfoFromConsoleReaderTest {
         String s = "123\tabc";
         int expected = 3;
 
-        assertEquals(expected, reader.getFirstWhiteSpaceIndex(s), "The only one white space is a tabulator.");
+        assertEquals(expected, stringUtil.getFirstWhiteSpaceIndex(s), "The only one white space is a tabulator.");
     }
 
     @Test
@@ -51,7 +43,7 @@ class ParcelsInfoFromConsoleReaderTest {
         String s = "123 \tabc";
         int expected = 3;
 
-        assertEquals(expected, reader.getFirstWhiteSpaceIndex(s), "The first one white space is a space.");
+        assertEquals(expected, stringUtil.getFirstWhiteSpaceIndex(s), "The first one white space is a space.");
     }
 
     @Test
@@ -60,6 +52,6 @@ class ParcelsInfoFromConsoleReaderTest {
         String s = "123\t abc";
         int expected = 3;
 
-        assertEquals(expected, reader.getFirstWhiteSpaceIndex(s), "The first one white space is a tabulator.");
+        assertEquals(expected, stringUtil.getFirstWhiteSpaceIndex(s), "The first one white space is a tabulator.");
     }
 }

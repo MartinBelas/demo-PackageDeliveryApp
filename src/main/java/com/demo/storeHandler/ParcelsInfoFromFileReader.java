@@ -1,4 +1,4 @@
-package com.demo.parcelsInfoReader;
+package com.demo.storeHandler;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,7 +25,7 @@ public class ParcelsInfoFromFileReader implements ParcelsInfoReader {
     }
 
     @Override
-    public void read() throws IOException {
+    public void run() {
 
         File inputFile = provideInputFile(this.filePath);
         if (!inputFile.exists()) {
@@ -51,7 +51,11 @@ public class ParcelsInfoFromFileReader implements ParcelsInfoReader {
                     log.info("Imported parcel: {}", p);
                 }
             }
-        }
+        } catch (IOException e) {
+            log.error(e.getMessage());
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
     }
 
     private File provideInputFile(String inputFileName) {

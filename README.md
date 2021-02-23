@@ -58,6 +58,8 @@ gradlew test
 ## Not finished yet
 - Javadoc
 - Integration tests
+- Input validation
+- Fees feature
 
 
 ## Author
