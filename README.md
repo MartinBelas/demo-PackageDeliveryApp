@@ -5,6 +5,10 @@ Each package information consists of weight (in kg) and destination postal code.
 Think about these packages in the same way, when you send one using postal office. 
 Data are kept in memory (no database engine). 
 
+The behavior of the application is slightly different from the assignment, 
+the console print is performed every 10 seconds to make it clearer what is happening in the application.
+
+There is prepared a file with packages data in /data folder. It contains about 70k records and it is read by 
 
 ## Installation
 
@@ -60,6 +64,9 @@ gradlew test
 - Integration tests
 - Input validation
 - Fees feature
+- solve TODOs
+- remove "Thread sleeping" in ParcelsInfoFromFileReader !!
+
 
 
 ## Author
