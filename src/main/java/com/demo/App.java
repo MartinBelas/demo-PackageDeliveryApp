@@ -2,6 +2,8 @@ package com.demo;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,6 +43,7 @@ public class App {
         
         executorService.submit(reader);
         
-        executorService.submit(new ParcelsInfoConsoleWriter());
+        ScheduledExecutorService schExecutorService = Executors.newScheduledThreadPool(5);
+        schExecutorService.scheduleAtFixedRate(new ParcelsInfoConsoleWriter(store), 0, 10, TimeUnit.SECONDS);
     }
 }
