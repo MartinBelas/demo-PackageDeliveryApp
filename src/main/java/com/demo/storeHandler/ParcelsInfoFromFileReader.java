@@ -41,6 +41,14 @@ public class ParcelsInfoFromFileReader implements ParcelsInfoReader {
 
             String line;
             while (sc.hasNextLine()) {
+                
+                //TODO remove in "production", it is here because of simulation of long lasting non-blocking reading operation 
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
 
                 line = sc.nextLine();
                 if (!line.isEmpty()) {
@@ -48,14 +56,17 @@ public class ParcelsInfoFromFileReader implements ParcelsInfoReader {
                     Validate.isTrue(packageArray.length == 2, "Incorrect input data for package.");
                     Parcel p = new Parcel(Float.parseFloat(packageArray[0]), packageArray[1].trim());
                     store.put(p);
-                    log.info("Imported parcel: {}", p);
+                    log.debug("Imported parcel: {}", p);
                 }
             }
         } catch (IOException e) {
             log.error(e.getMessage());
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } 
+        }
+        
+        log.info("The application was terminated correctly after reading from file.");
+        System.exit(0);
     }
 
     private File provideInputFile(String inputFileName) {
